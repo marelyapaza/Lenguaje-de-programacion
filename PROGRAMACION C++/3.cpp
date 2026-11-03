@@ -1,51 +1,53 @@
 #include <iostream>
+#include <iomanip>
 using namespace std;
-
-// Prototipos de las funciones modulares
-void sumar(int a, int b);
-void restar(int a, int b);
-void multiplicar(int a, int b);
-void dividir(int a, int b);
-
+ 
 int main() {
-    int a, b;
 
-    cout << "Ingrese el valor de a: ";
-    cin >> a;
-    cout << "Ingrese el valor de b: ";
-    cin >> b;
-
-    cout << "\n--- RESULTADOS ---" << endl;
-    
-    // Llamada a cada módulo (función)
-    sumar(a, b);
-    restar(a, b);
-    multiplicar(a, b);
-    dividir(a, b);
-
-    return 0;
-}
-
-// Módulo de suma
-void sumar(int a, int b) {
-    cout << "Suma: " << a + b << endl;
-}
-
-// Módulo de resta
-void restar(int a, int b) {
-    cout << "Resta: " << a - b << endl;
-}
-
-// Módulo de multiplicación
-void multiplicar(int a, int b) {
-    cout << "Multiplicacion: " << a * b << endl;
-}
-
-// Módulo de división
-void dividir(int a, int b) {
-    if (b != 0) {
-        cout << "Division: " << (float)a / b << endl;
-    } else {
-        cout << "Division: No se puede dividir entre cero." << endl;
+    int n, i, aprobados, desaprobados;
+    double notas[30], suma, mayor, menor;
+ 
+    aprobados = 0;
+    desaprobados = 0;
+    suma = 0;
+ 
+    do {
+        cout << "Ingrese el numero de estudiantes (1-30): ";
+        cin >> n;
+    } while (n < 1 || n > 30);
+ 
+    for (i = 0; i < n; i++) {
+        do {
+            cout << "Nota del estudiante " << i + 1 << " (0-20): ";
+            cin >> notas[i];
+        } while (notas[i] < 0 || notas[i] > 20);
     }
+ 
+    mayor = notas[0];
+    menor = notas[0];
+ 
+    for (i = 0; i < n; i++) {
+        suma = suma + notas[i];
+        if (notas[i] > mayor) {
+            mayor = notas[i];
+        }
+        if (notas[i] < menor) {
+            menor = notas[i];
+        }
+        if (notas[i] >= 10.5) {
+            aprobados++;
+        } else {
+            desaprobados++;
+        }
+    }
+ 
+    cout << fixed << setprecision(2);
+    cout << "Promedio general : " << suma/n << endl;
+    cout << "Nota mas alta    : " << mayor << endl;
+    cout << "Nota mas baja    : " << menor << endl;
+    cout << "Aprobados        : " << aprobados << endl;
+    cout << "Desaprobados     : " << desaprobados << endl;
+ 
+    return 0; 
 }
+
